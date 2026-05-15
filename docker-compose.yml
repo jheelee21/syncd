@@ -23,7 +23,8 @@ services:
     restart: unless-stopped
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-password}@db:5432/${POSTGRES_DB:-syncd}
-      SECRET_KEY: ${SECRET_KEY:-changethissecretkey}
+      SECRET_KEY: ${SECRET_KEY:?SECRET_KEY must be set in .env}
+      CORS_ORIGINS: ${CORS_ORIGINS:-*}
     ports:
       - "8000:8000"
     depends_on:

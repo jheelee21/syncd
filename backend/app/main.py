@@ -23,9 +23,13 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+# Parse allowed origins; accept "*" or a comma-separated list
+_raw_origins = settings.CORS_ORIGINS.strip()
+_cors_origins = [o.strip() for o in _raw_origins.split(",") if o.strip()] or ["*"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=_cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

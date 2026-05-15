@@ -10,9 +10,12 @@ class Settings(BaseSettings):
     DATABASE_URL: str = "postgresql://postgres:password@db:5432/syncd"
 
     # JWT
-    SECRET_KEY: str = "changethissecretkey"
+    SECRET_KEY: str
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7 days
+
+    # CORS – comma-separated list of allowed origins; use "*" for development only
+    CORS_ORIGINS: str = "*"
 
     class Config:
         env_file = ".env"

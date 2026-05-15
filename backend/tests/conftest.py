@@ -1,11 +1,17 @@
+import os
+
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 
-from app.database import Base, get_db
-import app.database as db_module
+# Provide required settings before importing app modules
+os.environ.setdefault("SECRET_KEY", "testsecretkey")
+os.environ.setdefault("DATABASE_URL", "sqlite://")
+
+from app.database import Base, get_db  # noqa: E402
+import app.database as db_module  # noqa: E402
 
 SQLALCHEMY_DATABASE_URL = "sqlite://"
 
